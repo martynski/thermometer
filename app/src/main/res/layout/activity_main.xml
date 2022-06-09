@@ -48,8 +48,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Temperatura:"
-        tools:layout_editor_absoluteX="108dp"
-        tools:layout_editor_absoluteY="487dp" />
+        app:layout_constraintBottom_toTopOf="@+id/start"
+        app:layout_constraintEnd_toStartOf="@+id/tempShow"
+        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/graph"
+        app:layout_constraintVertical_bias="0.502" />
+
+    <TextView
+        android:id="@+id/tempShow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="84dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/stop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/graph"
+        app:layout_constraintVertical_bias="0.502" />
 
     <ImageView
         android:id="@+id/graph"
@@ -61,30 +76,6 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="69dp"
         tools:src="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/tempShow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="230dp"
-        tools:layout_editor_absoluteY="487dp" />
-
-    <TextView
-        android:id="@+id/freq"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="133dp"
-        tools:layout_editor_absoluteY="531dp" />
-
-    <TextView
-        android:id="@+id/freqShow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="230dp"
-        tools:layout_editor_absoluteY="531dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

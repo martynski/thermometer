@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.Random;
 
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     public Paint paint;
     public Paint text;
     public FFT fft;
+
+    public TextView tv1;
 
     int samplingfrequency = 12000;
     int blockSize = 8192;
@@ -89,6 +92,10 @@ public class MainActivity extends AppCompatActivity {
         btn2.setOnClickListener(view -> {
             loop = false;
         });
+
+        this.tv1 = findViewById(R.id.tempShow);
+        String s = String.valueOf("0");
+        tv1.setText(s);
 
         this.startThread();
     }
@@ -158,22 +165,27 @@ public class MainActivity extends AppCompatActivity {
 
         int freq = (pick * samplingfrequency) / blockSize;
 
-         //Michal M.
          double a = 0.013;
          double b = -14.4;
          double temp = Math.round((a * freq + b) * 100.0) / 100.0;
 
-        // Bartek. R
-//        double a = 0.014;
-//        double b = -16.86;
-//        double temp = Math.round((a * freq + b) * 100.0) / 100.0;
 
         canvas.drawText("freq: " + freq, (float) 250.0, (float) 50.0, text);
         canvas.drawText("pick: " + pick, (float) 250.0, (float) 75.0, text);
         canvas.drawText("temp: " + temp, (float) 250.0, (float) 100.0, text);
 
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                TextView tv1 = findViewById(R.id.tempShow);
+                String s=String.valueOf(temp);
+                tv1.setText(s);
+
+            }
+        });
+
         iv.invalidate();
-        //frequency += 20;
     }
 
     protected void readAudio() {
@@ -182,13 +194,6 @@ public class MainActivity extends AppCompatActivity {
         int bufferSize = AudioRecord.getMinBufferSize(samplingfrequency, channelConfiguration, audioEncoding);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
 
